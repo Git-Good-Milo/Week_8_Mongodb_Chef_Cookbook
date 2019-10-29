@@ -11,7 +11,7 @@ end
 
 apt_repository 'mongodb-org' do
   uri 'http://repo.mongodb.org/apt/ubuntu'
-  distribution 'trusty/mongodb-org/3.2'
+  distribution 'xenial/mongodb-org/3.2'
   components ['multiverse']
   keyserver 'hkp://keyserver.ubuntu.com:80'
   key 'EA312927'
@@ -20,16 +20,19 @@ end
 
 template '/etc/mongod.conf' do
   source 'mongod.conf.erb'
-  mode '0755'
-  owner 'root'
-  group 'root'
+  variables(port_number: node["mongod"]["port_number_27017"])
+  notifies :restart, 'service[mongod]'
+  # mode '0755'
+  # owner 'root'
+  # group 'root'
 end
 
 template '/lib/systemd/system/mongod.service' do
   source 'mongod.service.erb'
-  mode '0600'
-  owner 'root'
-  group 'root'
+  #variables(proxy_port: node["mongod"]["proxy_port_27017"])
+  # mode '0600'
+  # owner 'root'
+  # group 'root'
 end
 
 package 'mongodb-org' do
@@ -38,9 +41,9 @@ package 'mongodb-org' do
 end
 
 service 'mongod' do
-  action :enable
+  action [ :enable, :start ]
 end
 
-service 'mongod' do
-  action :start
-end
+# service 'mongod' do
+#   action :start
+# end

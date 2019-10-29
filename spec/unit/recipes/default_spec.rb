@@ -37,7 +37,7 @@ describe 'mongodb_1::default' do
     end
 
     it "should create mongod.conf" do
-      expect(chef_run).to create_template "/etc/mongod.conf"
+      expect(chef_run).to create_template("/etc/mongod.conf").with_variables(port_number: 27017)
     end
 
     it "should create a mongod.service.erb" do
