@@ -18,6 +18,3 @@ chef_version '>= 14.0'
 # a Supermarket.
 #
 # source_url 'https://github.com/<insert_org_here>/mongodb_1'
-
-depends 'python'
-source_url "git@github.com:Git-Good-Milo/Week_8_python_cookbook.git"
