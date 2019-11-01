@@ -16,3 +16,4 @@ Test 11 Commented out initial kitchen.yml file
 Test 12
 Test 13
 Test 14
+Test 15 added enviromental variables
